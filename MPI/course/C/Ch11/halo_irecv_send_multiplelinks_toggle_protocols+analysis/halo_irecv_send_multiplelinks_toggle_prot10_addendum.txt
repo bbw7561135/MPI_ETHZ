@@ -1,0 +1,116 @@
+rzvmpi13@eslogin005:~> module list
+Currently Loaded Modulefiles:
+  1) modules/3.2.10.6                               11) xpmem/2.2.4-6.0.5.1_8.18__g35d5e73.ari         21) sdb/3.3.751-6.0.5.0_20.25__gb936019.ari
+  2) eproxy/2.0.22-6.0.5.0_2.1__g1ebe45c.ari        12) job/2.2.2-6.0.5.0_8.47__g3c644b5.ari           22) cray-mpich/7.7.0
+  3) cce/8.7.0                                      13) dvs/2.7_2.2.54-6.0.5.2_9.1__gdfbe7ad           23) craype-haswell
+  4) craype/2.5.14                                  14) alps/6.5.28-6.0.5.0_18.6__g13a91b6.ari         24) craype-hugepages16M
+  5) cray-libsci/18.04.1                            15) rca/2.2.16-6.0.5.0_15.34__g5e09e6d.ari         25) moab/9.1.1
+  6) udreg/2.3.2-6.0.5.0_13.12__ga14955a.ari        16) atp/2.1.1                                      26) torque/6.1.2.h1
+  7) ugni/6.0.14-6.0.5.0_16.9__g19583bb.ari         17) perftools-base/7.0.1                           27) system/ws_tools
+  8) pmi/5.0.13                                     18) PrgEnv-cray/6.0.4                              28) system/hlrs-defaults
+  9) dmapp/7.1.1-6.0.5.0_49.8__g1125556.ari         19) craype-network-aries                           29) util
+ 10) gni-headers/5.0.12-6.0.5.0_2.15__g2ef1ebc.ari  20) nodestat/2.3.78-6.0.5.0_8.13__gbe57af8.ari
+
+
+rzvmpi13@eslogin005:~> qsub -I -lnodes=4:ppn=24,walltime=0:24:00 -q test
+qsub: waiting for job 1847423.hazelhen-batch.hww.hlrs.de to start
+qsub: job 1847423.hazelhen-batch.hww.hlrs.de ready
+
+Directory: /zhome/academic/rus/rzv/mpi13
+Fri Jun 15 16:20:16 CEST 2018
+
+rzvmpi13@mom11:~> qstat -f qstat -f  1847066
+qstat: Unknown queue destination qstat
+qstat: Unknown Job Id Error 1847066.hazelhen-batch.hww.hlrs.de
+rzvmpi13@mom11:~>
+rzvmpi13@mom11:~> qstat -f qstat -f  1847423
+Job Id: 1847423.hazelhen-batch.hww.hlrs.de
+    Job_Name = STDIN
+    Job_Owner = rzvmpi13@eslogin005.hww.hlrs.de
+    resources_used.cput = 00:00:00
+    resources_used.vmem = 613576kb
+    resources_used.walltime = 00:01:13
+    resources_used.mem = 454912kb
+    resources_used.energy_used = 0
+    job_state = R
+    queue = test
+    server = hazelhen-batch.hww.hlrs.de
+    Checkpoint = u
+    ctime = Fri Jun 15 16:18:51 2018
+    Error_Path = /dev/pts/1
+    exec_host = 5459/0-23+5460/0-23+5461/0-23+5462/0-23
+    Hold_Types = n
+    interactive = True
+    Join_Path = n
+    Keep_Files = n
+    Mail_Points = a
+    mtime = Fri Jun 15 16:20:14 2018
+    Output_Path = /dev/pts/1
+    Priority = 0
+    qtime = Fri Jun 15 16:18:51 2018
+    Rerunable = False
+    Resource_List.nodes = 4:ppn=24
+    Resource_List.walltime = 00:24:00
+    Resource_List.nodect = 4
+    session_id = 35032
+    Variable_List = BATCH_PARTITION_ID=15242536,PBS_O_QUEUE=test,
+        PBS_O_HOME=/zhome/academic/rus/rzv/mpi13,PBS_O_LOGNAME=rzvmpi13,
+        PBS_O_PATH=/opt/hlrs/system/wrappers/bin:/opt/hlrs/system/ws/87c091d/
+        bin:/opt/torque/sbin:/opt/torque/bin:/opt/moab/bin:/opt/moab/sbin:/opt
+        /cray/pe/mpt/7.7.0/gni/bin:/opt/cray/sdb/3.3.751-6.0.5.0_20.25__gb9360
+        19.ari/bin:/opt/cray/nodestat/2.3.78-6.0.5.0_8.13__gbe57af8.ari/bin:/o
+        pt/cray/pe/perftools/7.0.1/bin:/opt/cray/pe/papi/5.6.0.1/bin:/opt/cray
+        /rca/2.2.16-6.0.5.0_15.34__g5e09e6d.ari/bin:/opt/cray/alps/6.5.28-6.0.
+        5.0_18.6__g13a91b6.ari/sbin:/opt/cray/job/2.2.2-6.0.5.0_8.47__g3c644b5
+        .ari/bin:/opt/cray/pe/craype/2.5.14/bin:/opt/cray/pe/cce/8.7.0/binutil
+        s/x86_64/x86_64-pc-linux-gnu/bin:/opt/cray/pe/cce/8.7.0/binutils/cross
+        /x86_64-aarch64/aarch64-linux-gnu/../bin:/opt/cray/pe/cce/8.7.0/utils/
+        x86_64/bin:/opt/cray/elogin/eproxy/2.0.22-6.0.5.0_2.1__g1ebe45c.ari/bi
+        n:/opt/cray/pe/modules/3.2.10.6/bin:/usr/local/bin:/usr/bin:/bin:/usr/
+        bin/X11:/usr/games:/usr/lib/mit/bin:/usr/lib/mit/sbin:/opt/cray/pe/bin
+        ,PBS_O_MAIL=/var/mail/rzvmpi13,PBS_O_SHELL=/bin/bash,
+        PBS_O_TZ=Europe/Berlin,PBS_O_LANG=de_DE.UTF-8,
+        PBS_O_SUBMIT_FILTER=/opt/torque/tools/torque_submitfilter,
+        PBS_O_WORKDIR=/zhome/academic/rus/rzv/mpi13,PBS_O_HOST=eslogin005,
+        PBS_O_SERVER=hazelhen-batch.hww.hlrs.de
+    euser = rzvmpi13
+    egroup = s29931
+    queue_type = E
+    etime = Fri Jun 15 16:18:51 2018
+    submit_args = -I -lnodes=4:ppn=24,walltime=0:24:00 -q test
+    start_time = Fri Jun 15 16:20:14 2018
+    Walltime.Remaining = 1361
+    start_count = 1
+    fault_tolerant = False
+    job_radix = 0
+    submit_host = eslogin005
+    init_work_dir = /zhome/academic/rus/rzv/mpi13
+    reservation_id = 15242536
+    login_node_id = mom11
+    login_property = academic
+    nppcu = 0
+    login_node_key = 11
+    request_version = 1
+
+
+rzvmpi13@mom11:~> time aprun -n 96 ./halo_irecv_send_multiplelinks_toggle.exe > ./halo_irecv_send_multiplelinks_toggle_prot10.txt
+real    7m36.520s
+user    0m0.116s
+sys     0m0.040s
+
+
+Protokoll 10&11:
+
+$ module load cae
+$ xtjobnodelist.sh 1847423
+PBS jobid:      1847423
+resid:  15242536
+used nodes:
+   NID    (HEX)    NODENAME     TYPE ARCH        OS CPUS  CU    CLASS AVAILMEM   PAGESZ CLOCKMHZ GPU SOCKETS DIES C/CU STORAGE                           LABEL0                           LABEL1                           LABEL2                           LABEL3
+  5459   0x1553  c4-2c1s4n3  compute   xt       CNL   48  24       HW   131072     4096     2500   0       2    2    2       0                                                
+  5460   0x1554  c4-2c1s5n0  compute   xt       CNL   48  24       HW   131072     4096     2500   0       2    2    2       0                                                
+  5461   0x1555  c4-2c1s5n1  compute   xt       CNL   48  24       HW   131072     4096     2500   0       2    2    2       0                                                
+  5462   0x1556  c4-2c1s5n2  compute   xt       CNL   48  24       HW   131072     4096     2500   0       2    2    2       0                                                
+node distribution (#nodes; blades,chassis,groups):      4; 2,1,1
+
+I.e., all 4 nodes are running on one chassis, there in two blades, one blade with 1 node and one blade with 3 nodes.

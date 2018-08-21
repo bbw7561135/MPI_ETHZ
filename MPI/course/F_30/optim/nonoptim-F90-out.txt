@@ -1,0 +1,46 @@
+mpirun -np 8 ./nonoptim-f90
+PE000: Sum1 =   28,  Sum2 =   28
+PE002: Sum1 =   28,  Sum2 =   28
+PE004: Sum1 =   28,  Sum2 =   28
+PE001: Sum1 =   28,  Sum2 =   28
+PE006: Sum1 =   28,  Sum2 =   28
+PE003: Sum1 =   28,  Sum2 =   28
+PE005: Sum1 =   28,  Sum2 =   28
+PE007: Sum1 =   28,  Sum2 =   28
+
+ Parallel Performance Analysis on            8 MPI processes
+ wall clock per process(sec)     minimum    average    maximum    max-min (over all
+ ---------------------------- ---------- ---------- ---------- ---------- processes)
+ parallelized numerics         0.432E-01  0.443E-01  0.468E-01  0.369E-02
+ serial numerics               0.557E-02  0.560E-02  0.561E-02  0.415E-04
+ communication                 0.193E-01  0.256E-01  0.305E-01  0.112E-01
+ idle at end of numerics       0.108E-03  0.267E-02  0.389E-02  0.378E-02
+ idle at end of communication  0.439E-04  0.499E-02  0.113E-01  0.112E-01
+ ---------------------------- ---------- ---------- ---------- ---------- ----------
+ total (parallel execution)    0.831E-01  0.832E-01  0.832E-01
+ estimated serial exec. time              0.360E+00   = SerialPart+Size*ParallelPart
+ estimated parallel efficience               54.091%  = SerialExec/ParExec/size*100%
+ ----------------------------------------------------------------------------------
+
+ wall clock per process [%]      minimum    average    maximum    max-min (over all
+ ---------------------------- ---------- ---------- ---------- ---------- processes)
+ parallelized numerics            51.89%     53.25%     56.33%      4.44%
+ serial numerics                   6.70%      6.73%      6.75%      0.05%
+ communication                    23.25%     30.80%     36.67%     13.43%
+ idle at end of numerics           0.13%      3.22%      4.68%      4.55%
+ idle at end of communication      0.05%      6.00%     13.54%     13.49%
+ ---------------------------- ---------- ---------- ---------- ---------- ----------
+ total (parallel execution)       99.97%    100.00%    100.10%
+ estimated serial exec. time                432.72%  = SerialPart+Size*ParallelPart
+ estimated parallel efficiency               54.09%  = SerialExec/ParExec/size*100%
+ -----------------------------------------------------------------------------------
+ Analysis of performance loss:
+ loss due to ...
+ not parallelized (i.e., serial)  code        5.89%  = SerialPart*(size-1)/size/ParExec
+ communication                               30.80%  = CommunicationPart / ParExec
+ idle time at end of numerics epochs          3.22%  = IdleNumericsPart  / ParExec
+ idle time at end of communication epochs     6.00%  = IdleCommunicPart  / ParExec
+ --------------------------------------- ---------- --------------------------------
+ total loss                                  45.91%  = sum
+ approximated parallel efficiency            54.09%  = 100% - total loss
+ -----------------------------------------------------------------------------------

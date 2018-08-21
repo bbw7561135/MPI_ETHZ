@@ -1,0 +1,45 @@
+##########################
+# NAMES CONFIGURATION FILE
+##########################
+
+LEVEL SYSTEM   SIZE 1
+IBM AIX POWER (32-bit)
+
+##########################
+
+LEVEL NODE     SIZE 1
+j39
+
+##########################
+
+LEVEL CPU      SIZE 4
+PROCESSOR 0:0
+PROCESSOR 0:1
+PROCESSOR 0:2
+PROCESSOR 0:3
+
+##########################
+
+LEVEL WORKLOAD SIZE 1
+Workload (1 application)
+
+##########################
+
+LEVEL APPL     SIZE 1
+MPI application
+
+##########################
+
+LEVEL TASK     SIZE 4
+MPI Rank 0
+MPI Rank 1
+MPI Rank 2
+MPI Rank 3
+
+##########################
+
+LEVEL THREAD   SIZE 4
+MPI Rank 0
+MPI Rank 1
+MPI Rank 2
+MPI Rank 3

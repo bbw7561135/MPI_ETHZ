@@ -1,0 +1,71 @@
+hpcrabe noco180.nec 210>mpicc -DLOOPPAR=5000000 -DLOOPSERIAL=500000 -o optim optim.c
+hpcrabe noco180.nec 211>mpirun_ssh -np 32 -hostfile $PBS_NODEFILE ./optim
+PE021: Sum1 =  496,  Sum2 =  496
+PE000: Sum1 =  496,  Sum2 =  496
+PE024: Sum1 =  496,  Sum2 =  496
+PE003: Sum1 =  496,  Sum2 =  496
+PE010: Sum1 =  496,  Sum2 =  496
+PE022: Sum1 =  496,  Sum2 =  496
+PE017: Sum1 =  496,  Sum2 =  496
+PE008: Sum1 =  496,  Sum2 =  496
+PE015: Sum1 =  496,  Sum2 =  496
+PE009: Sum1 =  496,  Sum2 =  496
+PE007: Sum1 =  496,  Sum2 =  496
+PE028: Sum1 =  496,  Sum2 =  496
+PE006: Sum1 =  496,  Sum2 =  496
+PE029: Sum1 =  496,  Sum2 =  496
+PE005: Sum1 =  496,  Sum2 =  496
+PE019: Sum1 =  496,  Sum2 =  496
+PE002: Sum1 =  496,  Sum2 =  496
+PE031: Sum1 =  496,  Sum2 =  496
+PE004: Sum1 =  496,  Sum2 =  496
+PE001: Sum1 =  496,  Sum2 =  496
+PE026: Sum1 =  496,  Sum2 =  496
+PE011: Sum1 =  496,  Sum2 =  496
+PE025: Sum1 =  496,  Sum2 =  496
+PE027: Sum1 =  496,  Sum2 =  496
+PE014: Sum1 =  496,  Sum2 =  496
+PE018: Sum1 =  496,  Sum2 =  496
+PE013: Sum1 =  496,  Sum2 =  496
+PE012: Sum1 =  496,  Sum2 =  496
+PE016: Sum1 =  496,  Sum2 =  496
+PE023: Sum1 =  496,  Sum2 =  496
+PE020: Sum1 =  496,  Sum2 =  496
+PE030: Sum1 =  496,  Sum2 =  496
+
+Parallel Performance Analysis on 32 MPI processes
+wall clock per process(sec)     minimum    average    maximum    max-min (over all
+---------------------------- ---------- ---------- ---------- ---------- processes)
+parallelized numerics         8.086e-01  8.134e-01  8.312e-01  2.253e-02
+serial numerics               8.088e-02  8.128e-02  8.148e-02  6.060e-04
+communication                 7.520e-02  7.782e-02  1.046e-01  2.935e-02
+idle at end of numerics       1.389e-02  1.591e-02  2.015e-02  6.267e-03
+idle at end of communication  1.630e-04  2.630e-02  2.996e-02  2.980e-02
+---------------------------- ---------- ---------- ---------- ---------- ----------
+total (parallel execution)    1.015e+00  1.015e+00  1.015e+00
+estimated serial exec. time              2.611e+01   = SerialPart+Size*ParallelPart
+estimated parallel efficience               80.412%  = SerialExec/ParExec/size*100%
+----------------------------------------------------------------------------------
+
+wall clock per process [%]      minimum    average    maximum    max-min (over all
+---------------------------- ---------- ---------- ---------- ---------- processes)
+parallelized numerics            79.69%     80.16%     81.91%      2.22%
+serial numerics                   7.97%      8.01%      8.03%      0.06%
+communication                     7.41%      7.67%     10.30%      2.89%
+idle at end of numerics           1.37%      1.57%      1.99%      0.62%
+idle at end of communication      0.02%      2.59%      2.95%      2.94%
+---------------------------- ---------- ---------- ---------- ---------- ----------
+total (parallel execution)       99.99%    100.00%    100.06%
+estimated serial exec. time               2573.17%  = SerialPart+Size*ParallelPart
+estimated parallel efficiency               80.41%  = SerialExec/ParExec/size*100%
+-----------------------------------------------------------------------------------
+Analysis of performance loss:
+loss due to ...
+not parallelized (i.e., serial)  code        7.76%  = SerialPart*(size-1)/size/ParExec
+communication                                7.67%  = CommunicationPart / ParExec
+idle time at end of numerics epochs          1.57%  = IdleNumericsPart  / ParExec
+idle time at end of communication epochs     2.59%  = IdleCommunicPart  / ParExec
+--------------------------------------- ---------- --------------------------------
+total loss                                  19.59%  = sum
+approximated parallel efficiency            80.41%  = 100% - total loss
+-----------------------------------------------------------------------------------

@@ -1,0 +1,22 @@
+_________________________________________________________________________________________
+|ID|Short |Severity|Count|Context|Description                           |1st Acc|2nd Acc|
+|  |Descri| Name   |     |[Best] |                                      |ess[Bes|ess[Bes|
+|  |ption |        |     |       |                                      |t]     |t]     |
+_________________________________________________________________________________________
+|1 |OpenMP|Caution |98   |omp for|OpenMP -- The access at "demo_correcte|"demo_c|"demo_c|
+|  | -- ca|        |     |       |d.c":136 cannot be private because it |orrecte|orrecte|
+|  |nnot b|        |     |       |expects the value previously defined a|d.c":13|d.c":13|
+|  |e priv|        |     |       |t "demo_corrected.c":136 in the serial|6      |6      |
+|  |ate   |        |     |       | execution                            |       |       |
+_________________________________________________________________________________________
+|2 |OpenMP|Caution |99   |omp for|OpenMP -- The access at "demo_correcte|"demo_c|"demo_c|
+|  | -- ca|        |     |       |d.c":181 cannot be private because it |orrecte|orrecte|
+|  |nnot b|        |     |       |expects the value previously defined a|d.c":18|d.c":18|
+|  |e priv|        |     |       |t "demo_corrected.c":181 in the serial|1      |1      |
+|  |ate   |        |     |       | execution                            |       |       |
+_________________________________________________________________________________________
+|3 |Thread|Informat|1    |Whole P|Thread termination at "demo_corrected.|"demo_c|"demo_c|
+|  | termi|ion     |     |rogram |c":17 - includes stack allocation of 1|orrecte|orrecte|
+|  |nation|        |     |1      |0485760 and use of 2416 bytes         |d.c":17|d.c":17|
+_________________________________________________________________________________________
+

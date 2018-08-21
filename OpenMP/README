@@ -1,0 +1,11 @@
+# In each of the user directories 00, 01, 02, ... 20, 
+# one must extract the archive tasks.tar
+# 
+  ( cd 01; tar -xvf ../tasks.tar ; chmod -R u+w * )
+# ... 
+#
+# It is already done for directory 01, but not for the other user directories. 
+# 
+# ------------------- 
+# The archive tasks.tar was built with:
+# (cd tasks ; tar -cvf ../tasks.tar heat/ hello/ performance/ pi/ pitfalls/) 

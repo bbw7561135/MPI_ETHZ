@@ -1,0 +1,31 @@
+<HTML>
+<PRE> 
+# Test the heat_petsc example:
+# cd  ~/PETSC/#nr
+ 
+mpirun -np 4  ./heat_petsc
+mpirun -np 4  ./heat_petsc -wrong_option -options_left
+mpirun -np 4  ./heat_petsc -ksp_monitor -ksp_view -view_sol -options_left  
+mpirun -np 4  ./heat_petsc -ksp_monitor -view_mat_x -draw_pause 3 -options_left
+mpirun -np 4  ./heat_petsc -ksp_view -view_sol -view_sol_x -draw_pause 3 -options_left  
+ 
+# Which is default KSP?    /    Compare the execution time:
+ 
+mpirun -np 4  ./heat_petsc -m 300 -n 300 -log_summary   -options_left
+mpirun -np 4  ./heat_petsc -m 300 -n 300 -ksp_type cg   -log_summary -options_left
+mpirun -np 4  ./heat_petsc -m 300 -n 300 -ksp_type cr   -log_summary -options_left
+mpirun -np 4  ./heat_petsc -m 300 -n 300 -ksp_type bcgs -log_summary -options_left
+ 
+# Calculate Speedup of CG:
+ 
+mpirun -np 1  ./heat_petsc -m 300 -n 300 -ksp_type cg   -log_summary -options_left
+mpirun -np 16 ./heat_petsc -m 300 -n 300 -ksp_type cg   -log_summary -options_left
+ 
+### If you want to compile:
+#
+# cp  ../source/heat_petsc.c  ../source/Makefile  ./
+# mv heat_petsc heat_petsc_orig   # otherwise, you overwrite the public version for all groups!!!! 
+# export PETSC_DIR=/app/ia64/libs/petsc
+# export PETSC_ARCH=linux64_intel_nec      # or  linux64_intel_nec-opt  
+# make  heat_petsc 
+</PRE>

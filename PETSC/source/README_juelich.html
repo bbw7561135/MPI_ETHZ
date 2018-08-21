@@ -1,0 +1,31 @@
+<HTML>
+<PRE>
+# Test the heat_petsc example:
+# cd  ~/PETSC/#nr
+
+llrun -p 4  ./heat_petsc
+llrun -p 4  ./heat_petsc -wrong_option -options_left
+llrun -p 4  ./heat_petsc -ksp_monitor -view_mat_x -draw_pause 3 -options_left
+llrun -p 4  ./heat_petsc -ksp_view -view_sol -view_sol_x -draw_pause 3 -options_left
+
+# Which is default KSP?    /    Compare the execution time:
+
+llrun -p 4  ./heat_petsc -m 300 -n 300 -log_summary   -options_left
+llrun -p 4  ./heat_petsc -m 300 -n 300 -ksp_type cg   -log_summary -options_left
+llrun -p 4  ./heat_petsc -m 300 -n 300 -ksp_type cr   -log_summary -options_left
+llrun -p 4  ./heat_petsc -m 300 -n 300 -ksp_type bcgs -log_summary -options_left
+
+# Calculate Speedup of CG:
+
+llrun -p 1  ./heat_petsc -m 300 -n 300 -ksp_type cg   -log_summary -options_left
+llrun -p 2  ./heat_petsc -m 300 -n 300 -ksp_type cg   -log_summary -options_left
+llrun -p 4  ./heat_petsc -m 300 -n 300 -ksp_type cg   -log_summary -options_left
+llrun -p 8  ./heat_petsc -m 300 -n 300 -ksp_type cg   -log_summary -options_left
+
+### If you want to compile:
+#
+# cp  ../source/heat_petsc.c  ../source/Makefile  ./
+# mv heat_petsc heat_petsc_orig   # otherwise, you overwrite the public version for all groups!!!! 
+# . petscsetup_32_O.sh            # or  petscsetup_32_g.sh  or  petscsetup_64_O.sh  or  petscsetup_64_g.sh
+# make  heat_petsc
+</PRE>

@@ -1,0 +1,17 @@
+# synopsis: 
+#    . init_clomp_DGRID2009
+#
+# This init_clomp_DGRID2009 overwrites the ppn=x argument on the qsub command.
+# This script implements 2 processes per node and 4 threads per process,
+# because each node on DGRID has 2 quad-core CPUs. 
+#
+uniq $PBS_NODEFILE > nodefile_1_process_per_node
+awk -- '{print $0; print $0}' nodefile_1_process_per_node > nodefile_2_process_per_node
+# With --transport & --adapter :
+## echo '--processes='`cat nodefile_2_process_per_node | wc -l` '--process_threads=4' '--hostlist='`cat nodefile_2_process_per_node | sed -e 's/$/,/'` ' --launch=ssh --transport=dapl  --adapter=OpenIB-scm1' | sed -e 's/, /,/g' -e 's/,$//' -e 's/,  *-/ -/'  > kmp_cluster.ini
+# Without --transport & --adapter :
+echo '--processes='`cat nodefile_2_process_per_node | wc -l` '--process_threads=4' '--hostlist='`cat nodefile_2_process_per_node | sed -e 's/$/,/'` ' --launch=ssh' | sed -e 's/, /,/g' -e 's/,$//' -e 's/,  *-/ -/'  > kmp_cluster.ini
+\ln -f kmp_cluster.ini .kmp_cluster 
+export KMP_CLUSTER_PATH=`pwd` 
+# ulimit -s unlimited
+unset LANG

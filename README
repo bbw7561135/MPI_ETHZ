@@ -1,0 +1,55 @@
+# Installation - ONLY ONCE !!!
+# ----------------------------
+cp  ~r-rabenseifer/all.tar.gz .
+tar -xvzf all.tar.gz
+/cluster/apps/local/setup_ssh.sh 
+
+# Init of the parallel execution window
+# -------------------------------------
+
+# from your first (edit&compile) window:
+xterm &
+# For MPI and OpenMP:
+# on the xterm without X11 (4 dedicated cores, interactively, 9 hours):
+bsub -Is -W 9:00 -n 4 bash -i
+# For Intel Inspector and PETSc:
+# on the xterm with X11 (4 dedicated cores, interactively, 9 hours):
+bsub -XF -Is -W 1:00 -n 4 bash -i
+
+          
+# MPI (OpenMPI 1.10.3 with Intel compiler)
+# ---
+module load new intel/2018.1 open_mpi/3.0.0
+cd ~/MPI/01
+mpicc
+mpif90  OR   mpifort
+mpirun -np 4 ./a.out
+
+
+# OpenMP:
+# -------
+module load new intel/2018.1
+cd ~/OpenMP/01/pi
+icc   -openmp ......
+ifort -openmp ......
+export OMP_NUM_THREADS=4
+./a.out
+
+# Intel Inspector:
+# ----------------
+bsub -XF -Is -W 1:00 -n 4 bash -i
+module load new intel/2018.1
+cd ~/OpenMP/01/pitfalls/
+icc -O0 -g -openmp .......
+export OMP_NUM_THREADS=4
+inspxe-gui &
+          
+
+# For PETSc (with old OpenMPI 1.6.5 + gcc):
+# -----------------------------------------
+bsub -XF -Is -W 1:00 -n 4 bash -i
+module purge
+module load new open_mpi/1.6.5 petsc/3.6.3
+cd ~/PETSC/01
+cat README.html
+mpirun -np 4 ./heat_petsc -ksp_monitor -view_mat_x -draw_pause 3 -options_left

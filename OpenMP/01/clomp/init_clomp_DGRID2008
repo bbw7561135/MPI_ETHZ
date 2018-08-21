@@ -1,0 +1,6 @@
+# synopsis: 
+#    . init_clomp
+echo '--processes='`cat $PBS_NODEFILE | wc -l` '--process_threads=4' '--hostlist='`cat $PBS_NODEFILE | sed -e 's/$/,/'` ' --launch=ssh --transport=dapl  --adapter=OpenIB-scm1' | sed -e 's/, /,/g' -e 's/,$//' -e 's/,  *-/ -/'  > kmp_cluster.ini
+\ln -f kmp_cluster.ini .kmp_cluster 
+export KMP_CLUSTER_PATH=`pwd` 
+ulimit -s unlimited

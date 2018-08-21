@@ -1,0 +1,52 @@
+#! /bin/csh
+# 
+# Sample script: Experimenting with linear solver options.
+# Can be used with, e.g., petsc-2.3.0/src/ksp/examples/tutorials/ex2.c
+# or heat_petsc.c
+#
+set appl='./heat_petsc'                                #  path of binary 
+set options='-ksp_monitor -ksp_view -log_summary -options_table -options_left -m 10 -n 10' 
+set no='0' 
+foreach np (1   4)                                   #  number of processors
+  foreach ksptype (gmres bcgs tfqmr)                 #  Krylov solver
+    set pctypes_parallel='bjacobi asm'               #  parallel preconditioners
+    set pctypes_serial='ilu'                         #  non-parallel preconditioners
+    if ($np == 1) then
+      set pctype_list="$pctypes_serial $pctypes_parallel"
+    else
+      set pctype_list="$pctypes_parallel"
+    endif 
+    foreach pctype ($pctype_list)
+      if ($pctype == ilu) then
+        foreach level (0 1 2)                          #  level of fill for ILU(k)
+          echo ' '
+          echo '************************ Beginning new run ************************'
+          echo ' '
+          set cmd="mpirun -np $np  $appl  -ksp_type $ksptype  -pc_type $pctype  -pc_ilu_levels $level  $options"
+          set no=`expr $no + 1`;  echo "$no :  $cmd" 
+          eval $cmd 
+        end #for level
+      else
+        foreach subpctype (jacobi sor ilu)             # subdomain solver
+          if ($subpctype == ilu) then
+            foreach level (0 1 2)                          #  level of fill for ILU(k)
+              echo ' '
+              echo '************************ Beginning new run ************************'
+              echo ' '
+              set cmd="mpirun -np $np  $appl  -ksp_type $ksptype  -pc_type $pctype -sub_ksp_type preonly  -sub_pc_type $subpctype  -sub_pc_ilu_levels $level  $options"
+              set no=`expr $no + 1`;  echo "$no :  $cmd" 
+              eval $cmd 
+            end #for level
+          else
+              echo ' '
+              echo '************************ Beginning new run ************************'
+              echo ' '
+              set cmd="mpirun -np $np  $appl  -ksp_type $ksptype  -pc_type $pctype  -sub_ksp_type preonly  -sub_pc_type $subpctype  $options"
+              set no=`expr $no + 1`;  echo "$no :  $cmd" 
+              eval $cmd 
+          endif #subpctype
+        end #for subpctype 
+      endif #pctype
+    end #for pctype
+  end #for ksptype
+end #for np 

@@ -1,0 +1,7 @@
+# synopsis: 
+#    . init_clomp
+export INTEL_LICENSE_FILE=/cacau/HLRS/hlrs/hpcintel/clomp_license.lic
+echo '--processes='`cat $PBS_NODEFILE | wc -l` '--process_threads=2' '--hostlist='`cat $PBS_NODEFILE | sed -e 's/$/,/'` | sed -e 's/, /,/g' -e 's/,$//' > kmp_cluster.ini
+\ln -f kmp_cluster.ini .kmp_cluster 
+export KMP_CLUSTER_PATH=`pwd` 
+ulimit -s unlimited

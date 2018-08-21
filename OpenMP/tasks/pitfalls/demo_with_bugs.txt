@@ -1,0 +1,73 @@
+_________________________________________________________________________________________
+|ID|Short |Severity|Count|Context|Description                           |1st Acc|2nd Acc|
+|  |Descri| Name   |     |[Best] |                                      |ess[Bes|ess[Bes|
+|  |ption |        |     |       |                                      |t]     |t]     |
+_________________________________________________________________________________________
+|1 |Write |Error   |98   |omp for|Memory read of a[] at "demo_with_bugs.|"demo_w|"demo_w|
+|  |-> Rea|        |     |       |c":30 conflicts with a prior memory wr|ith_bug|ith_bug|
+|  |d data|        |     |       |ite of a[] at "demo_with_bugs.c":29 (f|s.c":29|s.c":30|
+|  |-race |        |     |       |low dependence)                       |       |       |
+_________________________________________________________________________________________
+|2 |Write |Error   |197  |omp par|Memory read of a[] at "demo_with_bugs.|"demo_w|"demo_w|
+|  |-> Rea|        |     |allel r|c":54 conflicts with a prior memory wr|ith_bug|ith_bug|
+|  |d data|        |     |egion  |ite of a[] at "demo_with_bugs.c":49 (f|s.c":49|s.c":54|
+|  |-race |        |     |       |low dependence)                       |       |       |
+_________________________________________________________________________________________
+|3 |Read -|Error   |197  |omp par|Memory write of a[] at "demo_with_bugs|"demo_w|"demo_w|
+|  |> Writ|        |     |allel r|.c":49 conflicts with a prior memory r|ith_bug|ith_bug|
+|  |e data|        |     |egion  |ead of a[] at "demo_with_bugs.c":54 (a|s.c":54|s.c":49|
+|  |-race |        |     |       |nti dependence)                       |       |       |
+_________________________________________________________________________________________
+|4 |Write |Error   |98   |omp for|Memory write of x at "demo_with_bugs.c|"demo_w|"demo_w|
+|  |-> Wri|        |     |       |":71 conflicts with a prior memory wri|ith_bug|ith_bug|
+|  |te dat|        |     |       |te of x at "demo_with_bugs.c":71 (outp|s.c":71|s.c":71|
+|  |a-race|        |     |       |ut dependence)                        |       |       |
+_________________________________________________________________________________________
+|5 |Read -|Error   |98   |omp for|Memory write of x at "demo_with_bugs.c|"demo_w|"demo_w|
+|  |> Writ|        |     |       |":71 conflicts with a prior memory rea|ith_bug|ith_bug|
+|  |e data|        |     |       |d of x at "demo_with_bugs.c":72 (anti |s.c":72|s.c":71|
+|  |-race |        |     |       |dependence)                           |       |       |
+_________________________________________________________________________________________
+|6 |OpenMP|Warning |1    |"demo_w|OpenMP -- undefined in the serial code|"demo_w|"demo_w|
+|  | -- un|        |     |ith_bug| (original program) at "demo_with_bugs|ith_bug|ith_bug|
+|  |define|        |     |s.c":17|.c":91 with "demo_with_bugs.c":88     |s.c":88|s.c":91|
+|  |d in t|        |     |       |                                      |       |       |
+|  |he ser|        |     |       |                                      |       |       |
+|  |ial co|        |     |       |                                      |       |       |
+|  |de (or|        |     |       |                                      |       |       |
+|  |iginal|        |     |       |                                      |       |       |
+|  | progr|        |     |       |                                      |       |       |
+|  |am)   |        |     |       |                                      |       |       |
+_________________________________________________________________________________________
+|7 |Read -|Error   |98   |omp for|Memory write of sum at "demo_with_bugs|"demo_w|"demo_w|
+|  |> Writ|        |     |       |.c":105 conflicts with a prior memory |ith_bug|ith_bug|
+|  |e data|        |     |       |read of sum at "demo_with_bugs.c":105 |s.c":10|s.c":10|
+|  |-race |        |     |       |(anti dependence)                     |5      |5      |
+_________________________________________________________________________________________
+|8 |Write |Error   |98   |omp for|Memory read of sum at "demo_with_bugs.|"demo_w|"demo_w|
+|  |-> Rea|        |     |       |c":105 conflicts with a prior memory w|ith_bug|ith_bug|
+|  |d data|        |     |       |rite of sum at "demo_with_bugs.c":105 |s.c":10|s.c":10|
+|  |-race |        |     |       |(flow dependence)                     |5      |5      |
+_________________________________________________________________________________________
+|9 |Write |Error   |98   |omp for|Memory write of sum at "demo_with_bugs|"demo_w|"demo_w|
+|  |-> Wri|        |     |       |.c":105 conflicts with a prior memory |ith_bug|ith_bug|
+|  |te dat|        |     |       |write of sum at "demo_with_bugs.c":105|s.c":10|s.c":10|
+|  |a-race|        |     |       | (output dependence)                  |5      |5      |
+_________________________________________________________________________________________
+|10|OpenMP|Caution |98   |omp for|OpenMP -- The access at "demo_with_bug|"demo_w|"demo_w|
+|  | -- ca|        |     |       |s.c":136 cannot be private because it |ith_bug|ith_bug|
+|  |nnot b|        |     |       |expects the value previously defined a|s.c":13|s.c":13|
+|  |e priv|        |     |       |t "demo_with_bugs.c":136 in the serial|6      |6      |
+|  |ate   |        |     |       | execution                            |       |       |
+_________________________________________________________________________________________
+|11|OpenMP|Caution |99   |omp for|OpenMP -- The access at "demo_with_bug|"demo_w|"demo_w|
+|  | -- ca|        |     |       |s.c":178 cannot be private because it |ith_bug|ith_bug|
+|  |nnot b|        |     |       |expects the value previously defined a|s.c":17|s.c":17|
+|  |e priv|        |     |       |t "demo_with_bugs.c":178 in the serial|8      |8      |
+|  |ate   |        |     |       | execution                            |       |       |
+_________________________________________________________________________________________
+|12|Thread|Informat|1    |Whole P|Thread termination at "demo_with_bugs.|"demo_w|"demo_w|
+|  | termi|ion     |     |rogram |c":17 - includes stack allocation of 1|ith_bug|ith_bug|
+|  |nation|        |     |1      |0485760 and use of 2416 bytes         |s.c":17|s.c":17|
+_________________________________________________________________________________________
+
