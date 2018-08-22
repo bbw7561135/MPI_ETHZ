@@ -1,0 +1,9 @@
+  0 KSP Residual norm 1.151355650835e+00 
+  1 KSP Residual norm 5.282243657002e-01 
+  2 KSP Residual norm 2.665435886333e-01 
+  3 KSP Residual norm 1.294529384791e-01 
+  4 KSP Residual norm 1.414507261756e-02 
+  5 KSP Residual norm 3.202658506574e-03 
+  6 KSP Residual norm 6.337217618079e-04 
+  7 KSP Residual norm 1.205080425652e-04 
+Used  -ksp_type gmres   -pc_type bjacobi 
